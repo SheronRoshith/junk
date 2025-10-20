@@ -4,10 +4,10 @@ info:
   description: Retrieves password credential keyIds from an Azure AD application
   version: 1.0.0
 servers:
-  - url: https://graph.microsoft.com
+  - url: https://graph.microsoft.com/v1.0
     description: Microsoft Graph API
 paths:
-  /v1.0/applications/{applicationObjectId}:
+  /applications/{applicationObjectId}:
     get:
       summary: Get password credentials keyIds
       description: Retrieves the passwordCredentials and keyCredentials arrays containing keyId values for a given application object
