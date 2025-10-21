@@ -21,7 +21,7 @@ paths:
             type: string
         - name: $select
           in: query
-          required: true
+          required: false
           description: Select specific properties to return
           schema:
             type: string
@@ -60,5 +60,18 @@ paths:
                         endDateTime:
                           type: string
                           format: date-time
+        '401':
+          description: Unauthorized - invalid or missing authentication
         '404':
           description: Application not found
+      security:
+        - oauth2: []
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            https://graph.microsoft.com/.default: Access Microsoft Graph
