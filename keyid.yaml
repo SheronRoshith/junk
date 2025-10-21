@@ -62,15 +62,3 @@ paths:
                           format: date-time
         '404':
           description: Application not found
-      security:
-        - oauth2:
-            - Application.Read.All
-components:
-  securitySchemes:
-    oauth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
-          scopes:
-            Application.Read.All: Read all applications
