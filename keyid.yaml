@@ -7,7 +7,7 @@ servers:
   - url: https://graph.microsoft.com/v1.0
     description: Microsoft Graph API
 paths:
-  /applications/c282fdce-1747-4f7f-a2e6-24789dbe9895:
+  /applications/{applicationObjectId}:
     get:
       summary: Get password credentials keyIds
       description: Retrieves the passwordCredentials and keyCredentials arrays containing keyId values for a given application object
