@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Get User by UserPrincipalName
+  description: Retrieve an Azure AD user's objectId by their userPrincipalName (email)
+  version: 1.0.0
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph API
+paths:
+  /users:
+    get:
+      summary: Get user by userPrincipalName
+      description: Retrieves Azure AD user details filtered by userPrincipalName (e.g., user@domain.com)
+      operationId: getUserByUPN
+      parameters:
+        - name: $filter
+          in: query
+          required: true
+          description: "OData filter: userPrincipalName eq '{userPrincipalName}'"
+          schema:
+            type: string
+            example: userPrincipalName eq 'user@domain.com'
+      responses:
+        '200':
+          description: Successfully retrieved user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        userPrincipalName:
+                          type: string
+                        mail:
+                          type: string
+        '401':
+          description: Unauthorized - invalid/missing authentication
+        '404':
+          description: User not found
+      security:
+        - oauth2: []
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantid}/oauth2/v2.0/token
+          scopes:
+            https://graph.microsoft.com/.default:
+              description: Access Microsoft Graph
